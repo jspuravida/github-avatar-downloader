@@ -1,20 +1,18 @@
 var request = require('request');
 
+// var GITHUB_USER = "jspuravida";
+// var GITHUB_TOKEN = "76808c34b4d57eeb6374889281e9109074613845";
+
+
+
 function getRepoContributors(repoOwner, repoName, cb) {
-  request.get("http://api.github.com/repos/jquery/jquery/contributors")
-  .on('error', function (err) {          // Will show us the error if present
-    console.log(err.stack);
-  })
-  .on('response', function (response) {   // Will display the status code if po
-         console.log('Response Status Code: ', response.statusCode);
-         console.log('Response Status Message: ', response.statusMessage);
-  })
+
 
 }
 
 
 
-getRepoContributors("jquery", "jquery", function(err, result) {
-  console.log("Errors:", err);
+getRepoContributors("jquery", "jquery", function(result) {
   console.log("Result:", result);
 });
+

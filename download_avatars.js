@@ -24,7 +24,6 @@ function getRepoContributors(repoOwner, repoName, cb) {
     headers: {
       'User-Agent': 'request'
     }
-
   };
 // creates a request options object that holds the requestURL variable
 

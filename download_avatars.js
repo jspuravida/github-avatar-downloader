@@ -1,5 +1,6 @@
 var request = require('request');
 
+
 var GITHUB_USER = "jspuravida";
 var GITHUB_TOKEN = "76808c34b4d57eeb6374889281e9109074613845";
 
@@ -15,16 +16,28 @@ function getRepoContributors(repoOwner, repoName, cb) {
       'User-Agent': 'request'
     }
   };
+// creates a request options object that holds the requestURL variable
 
   request(requestOptions, function(err, response, body) {
     if (err) throw err;
-    console.log('Response Status Code:', response.body);
+    cb(JSON.parse(response.body));
   });
+  // parsed to view the avatar_url key
+
 }
 
 
 
 getRepoContributors("jquery", "jquery", function(result) {
-  console.log("Result:", result);
+
+  result.forEach(function(avatarBody) {
+    console.log(avatarBody.avatar_url);
+  })
+
+// added the parsed avatar_url to the callback for displaying.
+
+
+
+
 });
 

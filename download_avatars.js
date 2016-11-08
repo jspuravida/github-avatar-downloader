@@ -1,4 +1,5 @@
 var request = require('request');
+var fs = require('fs');
 
 
 var GITHUB_USER = "jspuravida";
@@ -15,6 +16,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
     headers: {
       'User-Agent': 'request'
     }
+
   };
 // creates a request options object that holds the requestURL variable
 
@@ -26,18 +28,27 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
 }
 
-
-
 getRepoContributors("jquery", "jquery", function(result) {
 
   result.forEach(function(avatarBody) {
-    console.log(avatarBody.avatar_url);
-  })
+    // console.log(avatarBody.avatar_url);
+    downloadImageByURL(avatarBody.avatar_url, avatarBody.login);
+  });
 
 // added the parsed avatar_url to the callback for displaying.
 
+function downloadImageByURL(url, filePath) {
 
+  request.get(url)
+    // .on('error', function (err) {
+    // })
 
+  .on('response', function (response) {
+    console.log("Downloading...", response.statusMessage);
+  })
 
+  .pipe(fs.createWriteStream("./avatars/" + filePath + ".jpg"));   //filepath where avatar downloads
+
+}
 });
 
